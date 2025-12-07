@@ -1,0 +1,596 @@
+[
+  {
+    "question": "The protocol data unit (PDU) for the application layer in the Internet protocol stack is",
+    "options": {
+      "option_1": "Segment",
+      "option_2": "Datagram",
+      "option_3": "Message",
+      "option_4": "Frame"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "Which of the following transport layer protocols is used to support electronic mail?",
+    "options": {
+      "option_1": "SMTP",
+      "option_2": "IP",
+      "option_3": "TCP",
+      "option_4": "UDP"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "In the IPv4 addressing format, the number of networks allowed under Class C addresses is",
+    "options": {
+      "option_1": "2^14",
+      "option_2": "2^7",
+      "option_3": "2^21",
+      "option_4": "2^24"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "An ISP has address block 245.248.128.0/20. It gives half to A and one quarter to B, retaining the rest. Which is a valid allocation to A and B?",
+    "options": {
+      "option_1": "245.248.136.0/21 and 245.248.128.0/22",
+      "option_2": "245.248.128.0/21 and 245.248.128.0/22",
+      "option_3": "245.248.132.0/22 and 245.248.132.0/21",
+      "option_4": "245.248.136.0/22 and 245.248.132.0/21"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "Consider a file of 10^6 bits sent from S to D over 3 links, each 100 km at speed 10^8 m/s, bandwidth 1 Mbps. File split into 1000 packets of 1000 bits each. Total transmission and propagation delay is approximately",
+    "options": {
+      "option_1": "1005ms",
+      "option_2": "1010ms",
+      "option_3": "3000ms",
+      "option_4": "3003ms"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "In TCP's AIMD, window size starts at 2 MSS, threshold 8 MSS. If timeout occurs on 5th transmission, what is congestion window at end of 10th transmission?",
+    "options": {
+      "option_1": "8 MSS",
+      "option_2": "14 MSS",
+      "option_3": "7 MSS",
+      "option_4": "12 MSS"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "Packets of the same session may be routed through different paths in:",
+    "options": {
+      "option_1": "TCP but not UDP",
+      "option_2": "TCP and UDP",
+      "option_3": "UDP but not TCP",
+      "option_4": "Neither TCP nor UDP"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "The Address Resolution Protocol (ARP) is used for:",
+    "options": {
+      "option_1": "Finding the IP address from the DNS",
+      "option_2": "Finding the IP address of the default gateway",
+      "option_3": "Finding the IP address that corresponds to a MAC address",
+      "option_4": "Finding the MAC address that corresponds to an IP address"
+    },
+    "answer": "option_4",
+    "justification": "NA"
+  },
+  {
+    "question": "The maximum window size for data transmission using the selective repeat protocol with n-bit frame sequence numbers is:",
+    "options": {
+      "option_1": "2^n",
+      "option_2": "2^(n-1)",
+      "option_3": "2^n - 1",
+      "option_4": "2^(n-2)"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "Why is the spanning tree algorithm used for routing among LANs connected by bridges?",
+    "options": {
+      "option_1": "For shortest path routing between LANs",
+      "option_2": "For avoiding loops in the routing paths",
+      "option_3": "For fault tolerance",
+      "option_4": "For minimizing collisions"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "A layer-4 firewall (device inspecting up to transport layer) CANNOT:",
+    "options": {
+      "option_1": "Block HTTP traffic during 9:00PM to 5:00AM",
+      "option_2": "Block all ICMP traffic",
+      "option_3": "Stop incoming traffic from a specific IP but allow outgoing to same IP",
+      "option_4": "Block TCP traffic from a specific user on a specific IP during 9:00PM-5:00AM"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "Consider email activities: m1: Send email from client to server; m2: Download email from mailbox to client; m3: Check email in web browser. Which protocol is used in each: m1, m2, m3?",
+    "options": {
+      "option_1": "m1:HTTP, m2:SMTP, m3:POP",
+      "option_2": "m1:SMTP, m2:FTP, m3:HTTP",
+      "option_3": "m1:SMTP, m2:POP, m3:HTTP",
+      "option_4": "m1:POP, m2:SMTP, m3:IMAP"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "After link cost change, distance vectors update, and cost N2-N3 reduces to 2, what is the new distance vector at node N3?",
+    "options": {
+      "option_1": "(3, 2, 0, 2, 5)",
+      "option_2": "(3, 2, 0, 2, 6)",
+      "option_3": "(7, 2, 0, 2, 5)",
+      "option_4": "(7, 2, 0, 2, 6)"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "One of the header fields in an IP datagram is TTL (Time to Live). Which statement best explains its need?",
+    "options": {
+      "option_1": "It can be used to prioritize packets",
+      "option_2": "It can be used to reduce delays",
+      "option_3": "It can be used to optimize throughput",
+      "option_4": "It can be used to prevent packet looping"
+    },
+    "answer": "option_4",
+    "justification": "NA"
+  },
+  {
+    "question": "Computers A and B have IPs 10.105.1.113 and 10.105.1.91 with same netmask N. Which netmask should NOT be used for them to be on the same network?",
+    "options": {
+      "option_1": "255.255.255.0",
+      "option_2": "255.255.255.128",
+      "option_3": "255.255.255.192",
+      "option_4": "255.255.255.224"
+    },
+    "answer": "option_4",
+    "justification": "NA"
+  },
+  {
+    "question": "Network with routers R1-R6 connected. Using distance vector algorithm, after stabilization, how many links will never carry any data?",
+    "options": {
+      "option_1": "4",
+      "option_2": "3",
+      "option_3": "2",
+      "option_4": "1"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "An organization has a Class B network and needs to form subnets for 64 departments. The subnet mask would be:",
+    "options": {
+      "option_1": "255.255.0.0",
+      "option_2": "255.255.64.0",
+      "option_3": "255.255.128.0",
+      "option_4": "255.255.252.0"
+    },
+    "answer": "option_4",
+    "justification": "NA"
+  },
+  {
+    "question": "In a packet switching network with two intermediate nodes and header of 3 bytes per packet, optimum packet size for 24-byte message is:",
+    "options": {
+      "option_1": "4",
+      "option_2": "6",
+      "option_3": "7",
+      "option_4": "9"
+    },
+    "answer": "option_4",
+    "justification": "NA"
+  },
+  {
+    "question": "For 10 Mbps Ethernet with 48-bit jam signal and 46.4 ms round trip delay, the minimum frame size (in bits) is:",
+    "options": {
+      "option_1": "94",
+      "option_2": "416",
+      "option_3": "464",
+      "option_4": "512"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "Which system call results in sending a SYN packet?",
+    "options": {
+      "option_1": "socket",
+      "option_2": "bind",
+      "option_3": "listen",
+      "option_4": "connect"
+    },
+    "answer": "option_4",
+    "justification": "NA"
+  },
+  {
+    "question": "In TCP slow start phase, the congestion window size:",
+    "options": {
+      "option_1": "does not increase",
+      "option_2": "increases linearly",
+      "option_3": "increases quadratically",
+      "option_4": "increases exponentially"
+    },
+    "answer": "option_4",
+    "justification": "NA"
+  },
+  {
+    "question": "Class B network with subnet mask 255.255.248.0 has maximum hosts per subnet:",
+    "options": {
+      "option_1": "1022",
+      "option_2": "1023",
+      "option_3": "2046",
+      "option_4": "2047"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "Maximum data size application layer can pass to TCP layer:",
+    "options": {
+      "option_1": "Any size",
+      "option_2": "2^16 bytes - header size",
+      "option_3": "2^16 bytes",
+      "option_4": "1500 bytes"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "Client connects to server (server did socket, bind, listen; then client socket + connect; server did not accept()). Which event could happen?",
+    "options": {
+      "option_1": "connect() returns successfully",
+      "option_2": "connect() blocks",
+      "option_3": "connect() returns an error",
+      "option_4": "connect() causes core dump"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "In a token bucket with rate 2 Mbps, bucket initially 16 Mb, network 10 Mbps, maximum duration of full 10 Mbps transmission is:",
+    "options": {
+      "option_1": "1.6 seconds",
+      "option_2": "2 seconds",
+      "option_3": "5 seconds",
+      "option_4": "8 seconds"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "Which application primarily uses UDP as the transport protocol?",
+    "options": {
+      "option_1": "HTTP",
+      "option_2": "Telnet",
+      "option_3": "DNS",
+      "option_4": "SMTP"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "In Ethernet with Manchester encoding, the bit rate is:",
+    "options": {
+      "option_1": "Half the baud rate",
+      "option_2": "Twice the baud rate",
+      "option_3": "Same as baud rate",
+      "option_4": "None of the above"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "In a slotted LAN with n stations each transmitting with probability p, probability that only one station transmits in a slot is:",
+    "options": {
+      "option_1": "(1-p)^(n-1)",
+      "option_2": "n*p*(1-p)^(n-1)",
+      "option_3": "p*(1-p)^(n-1)",
+      "option_4": "1 - (1-p)^(n-1)"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "In a token ring (speed 10^7 bps, propagation 200 m/μs), the 1-bit delay is equivalent to:",
+    "options": {
+      "option_1": "500 meters",
+      "option_2": "200 meters",
+      "option_3": "20 meters",
+      "option_4": "50 meters"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "Class B address split into subnets with a 6-bit subnet number. Maximum number of subnets and hosts per subnet:",
+    "options": {
+      "option_1": "62 subnets and 262142 hosts",
+      "option_2": "64 subnets and 262142 hosts",
+      "option_3": "62 subnets and 1022 hosts",
+      "option_4": "64 subnets and 1024 hosts"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "Message 11001001 with CRC polynomial x^3+1. Transmitted message should be:",
+    "options": {
+      "option_1": "11001001000",
+      "option_2": "11001001011",
+      "option_3": "11001010",
+      "option_4": "110010010011"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "Which of the following algorithms is NOT a divide-and-conquer algorithm by nature?",
+    "options": {
+      "option_1": "Euclidean algorithm (GCD)",
+      "option_2": "Heap Sort",
+      "option_3": "Cooley-Tukey FFT",
+      "option_4": "Quick Sort"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "What is the minimum number of multiplications needed to evaluate polynomial p(x)=a0 + a1 x + a2 x^2 + a3 x^3?",
+    "options": {
+      "option_1": "3",
+      "option_2": "4",
+      "option_3": "6",
+      "option_4": "9"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "If you need to compute x^n (n positive integer) without a built-in power function, the best time complexity you can achieve is:",
+    "options": {
+      "option_1": "O(n)",
+      "option_2": "O(n log n)",
+      "option_3": "O(log log n)",
+      "option_4": "O(log n)"
+    },
+    "answer": "option_4",
+    "justification": "NA"
+  },
+  {
+    "question": "An element x can be searched in O(log n) time in an array if:",
+    "options": {
+      "option_1": "The array is sorted",
+      "option_2": "The array is sorted and rotated by k, where k is known",
+      "option_3": "The array is sorted and rotated by k, where k is unknown",
+      "option_4": "The array is unsorted"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "In the secant method for solving f(x)=0, the next approximation x_t is computed as:",
+    "options": {
+      "option_1": "x_b - f(b)*(x_b-x_a)/(f(b)-f(a))",
+      "option_2": "x_b - f(a)*(x_b-x_a)/(f(b)-f(a))",
+      "option_3": "x_a - f(b)*(x_b-x_a)/(f(b)-f(a))",
+      "option_4": "x_b - (x_b-x_a)/2"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "Consider two algorithms for finding minimum and maximum in an array: A1 does it in n-1 comparisons (no divide & conquer), A2 uses pairwise divide and conquer. In worst-case, how do their comparisons compare?",
+    "options": {
+      "option_1": "a1 < a2",
+      "option_2": "a1 > a2",
+      "option_3": "a1 = a2",
+      "option_4": "Depends on input"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "What is the time complexity of binary search in a sorted array of size n?",
+    "options": {
+      "option_1": "O(n)",
+      "option_2": "O(log n)",
+      "option_3": "O(n log n)",
+      "option_4": "O(1)"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "Which sorting algorithm has the best (lowest) average-case time complexity among the following?",
+    "options": {
+      "option_1": "Quick Sort",
+      "option_2": "Merge Sort",
+      "option_3": "Heap Sort",
+      "option_4": "Insertion Sort"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "What is the time complexity of computing the spanning tree of a graph with V vertices and E edges using Kruskal's algorithm with union-find?",
+    "options": {
+      "option_1": "O(E log V)",
+      "option_2": "O(E + V log V)",
+      "option_3": "O(V^2)",
+      "option_4": "O(E V)"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "Which of the following problems is NP-complete?",
+    "options": {
+      "option_1": "Sorting an array",
+      "option_2": "Longest Common Subsequence",
+      "option_3": "Traveling Salesman Problem (decision version)",
+      "option_4": "Binary Search"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "Which data structure provides the fastest (average) lookup for implementing a priority queue in Dijkstra's algorithm?",
+    "options": {
+      "option_1": "Binary heap",
+      "option_2": "Fibonacci heap",
+      "option_3": "Array",
+      "option_4": "Red-Black tree"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "The Heap Sort algorithm has a worst-case running time of:",
+    "options": {
+      "option_1": "O(n^2)",
+      "option_2": "O(n log n)",
+      "option_3": "O(n)",
+      "option_4": "O(log n)"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "In a graph with V vertices and E edges, performing breadth-first search (BFS) from one vertex has time complexity:",
+    "options": {
+      "option_1": "O(V + E)",
+      "option_2": "O(V^2)",
+      "option_3": "O(E log V)",
+      "option_4": "O(E)"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "Which of these algorithms solves the single-source shortest path problem in negative-weight graphs (with no negative cycles)?",
+    "options": {
+      "option_1": "Dijkstra's algorithm",
+      "option_2": "Bellman-Ford algorithm",
+      "option_3": "Floyd-Warshall algorithm",
+      "option_4": "Prim's algorithm"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "In Dynamic Programming, the time complexity of the naive recursive Fibonacci is exponential, but with memoization it becomes:",
+    "options": {
+      "option_1": "O(n^2)",
+      "option_2": "O(n)",
+      "option_3": "O(2^n)",
+      "option_4": "O(log n)"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "Which algorithmic strategy is typically used in Quick Sort?",
+    "options": {
+      "option_1": "Dynamic Programming",
+      "option_2": "Divide and Conquer",
+      "option_3": "Greedy",
+      "option_4": "Backtracking"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "Consider a binary search tree (BST) with n distinct elements. The time complexity of finding the maximum element is:",
+    "options": {
+      "option_1": "Θ(n log n)",
+      "option_2": "Θ(n)",
+      "option_3": "Θ(log n)",
+      "option_4": "Θ(1)"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "Which of the following is NOT a dynamic programming problem?",
+    "options": {
+      "option_1": "Knapsack problem",
+      "option_2": "Matrix chain multiplication",
+      "option_3": "Prim's MST algorithm",
+      "option_4": "Longest common subsequence"
+    },
+    "answer": "option_3",
+    "justification": "NA"
+  },
+  {
+    "question": "What is the space complexity of storing an adjacency matrix for a graph with V vertices?",
+    "options": {
+      "option_1": "O(V + E)",
+      "option_2": "O(V^2)",
+      "option_3": "O(E)",
+      "option_4": "O(V)"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "Floyd-Warshall algorithm is used to compute:",
+    "options": {
+      "option_1": "Single-source shortest paths",
+      "option_2": "All-pairs shortest paths",
+      "option_3": "Minimum spanning tree",
+      "option_4": "Topological sort"
+    },
+    "answer": "option_2",
+    "justification": "NA"
+  },
+  {
+    "question": "Which of the following is not a client-server application?",
+    "options": {
+      "option_1": "Ping",
+      "option_2": "Web-browsing",
+      "option_3": "Internet Chat",
+      "option_4": "Email"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "What does DHCP stand for?",
+    "options": {
+      "option_1": "Dynamic Host Configuration Protocol",
+      "option_2": "Dynamic Host Configuration Provider",
+      "option_3": "Digital Host Communication Provider",
+      "option_4": "Digital Host Communication Protocol"
+    },
+    "answer": "option_1",
+    "justification": "NA"
+  },
+  {
+    "question": "Which device can connect multiple LAN segments into a single network?",
+    "options": {
+      "option_1": "Ethernet card",
+      "option_2": "Modem",
+      "option_3": "Router",
+      "option_4": "Bridge"
+    },
+    "answer": "option_4",
+    "justification": "NA"
+  }
+]
