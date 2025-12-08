@@ -9,8 +9,20 @@
   <body>
     <h1>Quiz App</h1>
     <main id="container">
+      <div id="start-screen" class="">
+        <form>
+          <label for="question-time">Time (in minutes) for each question:</label>
+          <input type="range" name="question-time" id="question-time" min="1" max="10" placeholder="2" value="2">
+          <p>Value: <span id="slider-value"> minutes</span></p>
+          <label for="number-of-questions">Number of questions:</label>
+          <input type="number" name="number-of-questions" id="number-of-questions" placeholder="5" min="5" max="50">
+          <button id="start-game-button">Start Quiz</button>
+        </form>
+      </div>
+      <div id="quiz-screen" class="hidden">
+        <p id="points-display"></p>
         <section id="question-container">
-
+          
         </section>
         <section id="options-container">
           <div class="option">
@@ -20,6 +32,11 @@
         <span id="justification-container">
           
         </span>
+      </div>
+      <div id="results-screen" class="hidden">
+
+      </div>
+      <span id="error"></span>
     </main>
     <script src="./script.js"></script>
   </body>
