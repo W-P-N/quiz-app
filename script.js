@@ -1,7 +1,13 @@
 (function () {
     const state = {
         counter: 0,
-        timeInterval: null
+        timeInterval: null,
+        totalQuestions: 0,
+        questionsArray: [],
+        currentQuestionNumber: 0,
+        correctlyAnswered: 0,
+        totalMarks: 0,
+        questionWiseJustifications: []
     };
     // Get DOM references
     const questionTimeSlider = document.getElementById('question-time');
@@ -19,29 +25,24 @@
     });
     startQuizButton.addEventListener('click', startQuiz);
 
-    function startQuiz(e) {
+    async function startQuiz(e) {
         e.preventDefault();
         errorSpanText.innerHTML = "";
 
-        // Quiz vars
-        let points = 0;
-
         // DOM references:
-        const numberOfQuestions = document.getElementById('number-of-questions');
-        const pointsDisplay = document.getElementById('points-display');
-        const questionContainer = document.getElementById('question-container');
-        const optionsContainer = document.getElementById('options-container');
+        const numberOfQuestionsInput = document.getElementById('number-of-questions');
 
         try {
             // Check if the values enterd by the user are in range
-            checkStartQuizParams(numberOfQuestions);
+            checkStartQuizParams(numberOfQuestionsInput);
             // Make quiz screen visible and start screen hidden
             makeQuizVisible();
             // Get Random Question from the json file
-            const questionsArr = getRandomQuestions(numberOfQuestions.value, numberOfQuestions.min, numberOfQuestions.max);
+            await getRandomQuestionsInArray(numberOfQuestionsInput.value, numberOfQuestionsInput.min, numberOfQuestionsInput.max);
             // Timer display
             startTimer();
-            // Points display
+            // Show question
+            displayQuestion();
             // Initialize timer
             // Display 
         } catch (error) {
@@ -51,7 +52,7 @@
         };
     };
 
-    async function getRandomQuestions(numQuestionsValue, min, max) {
+    async function getRandomQuestionsInArray(numQuestionsValue, min, max) {
         const count = parseInt(numQuestionsValue);
         const parsedMin = parseInt(min);
         const parsedMax = parseInt(max);
@@ -66,16 +67,15 @@
         // Convert set to array
         const uniqueNumArr = Array.from(uniqueNums);
         // console.log(uniqueNumArr);  // Debug log
-        
+        const questionsArr = [];
         // Get unique data
         const data = await fetchData();
         // console.log(data);  // Debug log
-        const questionsArr = [];
         for(let idx of uniqueNumArr) {
-            questionsArr.push(data[idx]);
+            state.questionsArray.push(data[idx]);
         };
-        
-        return questionsArr;
+
+        return;
     };
 
     async function fetchData() {
@@ -107,8 +107,6 @@
 
     function startTimer() {
         state.counter = parseInt(questionTimeSlider.value) * 60;
-        const minutesDisplay = document.getElementById('minutes-display');
-        const secondsDisplay = document.getElementById('seconds-display');
 
         state.timeInterval = setInterval(function() {
             if(state.counter <= 0) {
@@ -119,12 +117,41 @@
             state.counter-=1;
         }, 1000);
 
-        function displayTimer(counter) {
-            let seconds = counter % 60;
-            let minutes = Math.floor(counter / 60);
-            minutesDisplay.textContent = minutes;
-            secondsDisplay.textContent = seconds;
-            return;
-        };
     };
+
+    function displayTimer(counter) {
+        const minutesDisplay = document.getElementById('minutes-display');
+        const secondsDisplay = document.getElementById('seconds-display');
+        
+        let seconds = counter % 60;
+        let minutes = Math.floor(counter / 60);
+        minutesDisplay.textContent = minutes;
+        secondsDisplay.textContent = seconds;
+        return;
+    };
+
+    function displayQuestion() {
+        const questionContainer = document.getElementById('question-container');
+        const optionsContainer = document.getElementById('options-container');
+
+        const currentQuestion = state.questionsArray[state.currentQuestionNumber];
+        state.currentQuestionNumber+=1;
+
+        const questionElement = document.createElement('h3');
+        questionElement.textContent = currentQuestion.question;
+        questionContainer.appendChild(questionElement);
+
+        const optionContainers = [];
+        Object.entries(currentQuestion.options).forEach(([key, value]) => {
+            const optionContainer = document.createElement('article');
+            optionContainer.id = 'option'
+            optionContainer.textContent = value;
+            optionContainers.push(optionContainer);
+        });
+
+        optionContainers.forEach(option => {
+            optionsContainer.appendChild(option);
+        });
+        
+    }
 }) ();
