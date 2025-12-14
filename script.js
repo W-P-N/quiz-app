@@ -1,4 +1,8 @@
 (function () {
+    const state = {
+        counter: 0,
+        timeInterval: null
+    };
     // Get DOM references
     const questionTimeSlider = document.getElementById('question-time');
     const sliderValue = document.getElementById('slider-value');
@@ -8,10 +12,10 @@
     // Event Listeners
     document.addEventListener('DOMContentLoaded', function() {
         // Slider Value display after the content for the DOM is loaded
-        sliderValue.innerHTML = questionTimeSlider.value;
+        sliderValue.textContent = questionTimeSlider.value;
     });
     questionTimeSlider.addEventListener('input', function() {
-        sliderValue.innerHTML = this.value;
+        sliderValue.textContent = this.value;
     });
     startQuizButton.addEventListener('click', startQuiz);
 
@@ -35,8 +39,9 @@
             makeQuizVisible();
             // Get Random Question from the json file
             const questionsArr = getRandomQuestions(numberOfQuestions.value, numberOfQuestions.min, numberOfQuestions.max);
-            // Initialize points counter
-            pointsDisplay.innerHTML = points;
+            // Timer display
+            startTimer();
+            // Points display
             // Initialize timer
             // Display 
         } catch (error) {
@@ -100,27 +105,26 @@
         return;
     };
 
-    function showQuestion() {
+    function startTimer() {
+        state.counter = parseInt(questionTimeSlider.value) * 60;
+        const minutesDisplay = document.getElementById('minutes-display');
+        const secondsDisplay = document.getElementById('seconds-display');
 
-    };
-    
-    function selectAnswer() {
+        state.timeInterval = setInterval(function() {
+            if(state.counter <= 0) {
+                clearInterval(state.timeInterval);
+            };
 
-    };
+            displayTimer(state.counter);
+            state.counter-=1;
+        }, 1000);
 
-    function showResults() {
-
-    };
-
-    function restartQuiz() {
-
-    };
-
-    function chooseRandomQuestion() {
-
-    };
-
-    function updatePoint() {
-
+        function displayTimer(counter) {
+            let seconds = counter % 60;
+            let minutes = Math.floor(counter / 60);
+            minutesDisplay.textContent = minutes;
+            secondsDisplay.textContent = seconds;
+            return;
+        };
     };
 }) ();
