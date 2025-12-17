@@ -132,7 +132,7 @@
 
     function displayQuestion() {
         const questionContainer = document.getElementById('question-container');
-        const optionsContainer = document.getElementById('options-container');
+        const optionsContainerForm = document.getElementById('options-container-form');
 
         const currentQuestion = state.questionsArray[state.currentQuestionNumber];
         state.currentQuestionNumber+=1;
@@ -143,15 +143,25 @@
 
         const optionContainers = [];
         Object.entries(currentQuestion.options).forEach(([key, value]) => {
-            const optionContainer = document.createElement('article');
-            optionContainer.id = 'option'
-            optionContainer.textContent = value;
+            const optionContainer = document.createElement('input');
+            const optionLabel = document.createElement('label');
+
+            optionContainer.type = 'radio';
+            optionContainer.id = key;
+            optionContainer.value = key;
+            optionContainer.name = 'option';
+
+            optionLabel.id = key;
+            optionLabel.htmlFor = key;
+            optionLabel.textContent = value;
+
             optionContainers.push(optionContainer);
+            optionContainers.push(optionLabel);
         });
 
         optionContainers.forEach(option => {
-            optionsContainer.appendChild(option);
+            optionsContainerForm.appendChild(option);
         });
-        
-    }
+    };
+    
 }) ();
