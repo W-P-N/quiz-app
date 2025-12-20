@@ -8,7 +8,8 @@
         correctlyAnswered: 0,
         totalMarks: 0,
         questionWiseJustifications: [],
-        userSubmit: false
+        userSubmit: false,
+        currentQuestionAnswer: null
     };
     // Get DOM references
     const questionTimeSlider = document.getElementById('question-time');
@@ -27,10 +28,6 @@
     });
     startQuizButton.addEventListener('click', startQuiz);
 
-    // submitAnswerButton.addEventListener('click', function() {
-    //     state.userSubmit = true;
-    // });
-
     async function startQuiz(e) {
         e.preventDefault();
         errorSpanText.innerHTML = "";
@@ -38,6 +35,12 @@
         const numQuestionsInput = document.getElementById('number-of-questions');
         const minNumQuestions = numQuestionsInput.min;
         const maxNumQuestions = numQuestionsInput.max;
+
+        // Event Listener for answer
+        submitAnswerButton.addEventListener('click', function() {
+            clearInterval(state.timeInterval);
+            onQuestionEnd();
+        });
 
         // Functions
         function validateNumberOfQuestions(numberOfQuestions, min, max) {
@@ -78,38 +81,18 @@
             quizScreen.classList.remove('hidden');
             return;
         };
-        function displayTimer(counter) {
-            const minutesDisplay = document.getElementById('minutes-display');
-            const secondsDisplay = document.getElementById('seconds-display');
-            
-            let seconds = counter % 60;
-            let minutes = Math.floor(counter / 60);
-            minutesDisplay.textContent = minutes;
-            secondsDisplay.textContent = seconds;
-            return;
-        };
-        function startTimer() {
-            state.counter = parseInt(questionTimeSlider.value) * 60;
-
-            state.timeInterval = setInterval(function() {
-                state.counter-=1;
-                if(state.counter <= 0) {
-                    clearInterval(state.timeInterval);
-                    onQuestionEnd();
-                };
-
-                displayTimer(state.counter);
-            }, 1000);
-        };
         function displayQuestion() {
             const questionsForm = document.getElementById('questions-container-form');
-
             // Question Display
             const questionBlock = document.getElementById('question-block');
-
-            const currentQuestion = state.questionsArray[state.currentQuestionNumber];
             
+            const currentQuestion = state.questionsArray[state.currentQuestionNumber];
             questionBlock.textContent = currentQuestion.question;
+            state.currentQuestionAnswer = currentQuestion.answer;
+            state.questionWiseJustifications.push(currentQuestion.justification);
+
+            const optionsBlock = document.getElementById('options-block');
+            optionsBlock.replaceChildren('');
 
             // Options Display
             Object.entries(currentQuestion.options).forEach(([key, value]) => {
@@ -130,13 +113,62 @@
 
                 optionDiv.appendChild(optionLabel);
 
-                questionsForm.appendChild(optionDiv);
+                optionsBlock.appendChild(optionDiv);
             });
         };
-        function checkAnswer() {
-
+        function showNextQuestion() {
+                if(state.currentQuestionNumber >= state.totalQuestions) {
+                    makeResultsScreenVisible();
+                    return;
+                };
+                displayQuestion();
+                startTimer();
         };
+        function startTimer() {
+            state.counter = parseInt(questionTimeSlider.value) * 60;
 
+            state.timeInterval = setInterval(function() {
+                state.counter-=1;
+                if(state.counter <= 0) {
+                    clearInterval(state.timeInterval);
+                    onQuestionEnd();
+                };
+
+                displayTimer(state.counter);
+            }, 1000);
+        };
+        function displayTimer(counter) {
+            const minutesDisplay = document.getElementById('minutes-display');
+            const secondsDisplay = document.getElementById('seconds-display');
+            
+            let seconds = counter % 60;
+            let minutes = Math.floor(counter / 60);
+            minutesDisplay.textContent = minutes;
+            secondsDisplay.textContent = seconds;
+            return;
+        };
+        function onQuestionEnd() {
+            // Get DOM reference for selected question
+            const selectedAnswer = document.querySelector('input[name="option"]:checked');
+            if(selectedAnswer) {
+                if(selectedAnswer.id === state.currentQuestionAnswer) {
+                    state.totalMarks += 2;
+                    state.correctlyAnswered += 1;
+                } else {
+                    state.totalMarks -= 1;
+                };
+            };
+            state.currentQuestionNumber++;
+            showNextQuestion();
+        };
+        function makeResultsScreenVisible() {
+            const quizScreen = document.getElementById('quiz-screen');
+            const resultsScreen = document.getElementById('results-screen');
+
+            quizScreen.classList.add('hidden');
+            resultsScreen.classList.remove('hidden');
+            return;
+        }
 
         try {
             // DOM references:
@@ -149,26 +181,13 @@
             await getRandomQuestionsInArray(state.totalQuestions, minNumQuestions, maxNumQuestions);
             // Make screen quiz visible
             makeQuizScreenVisible();
-
-            function showNextQuestion() {
-                if(state.currentQuestionNumber >= state.totalQuestions) {
-                    finishQuiz();
-                    return;
-                };
-                displayQuestion();
-                startTimer();
-            };
-
-            function finishQuiz() {
-
-            }
-
+            // Show questions
             showNextQuestion();
-            
         } catch (error) {
             errorSpanText.innerHTML = error;
             stateReset();
         }
+        return;
     };
 
     async function fetchData() {
