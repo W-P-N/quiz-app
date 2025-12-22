@@ -8,7 +8,6 @@
         correctlyAnswered: 0,
         totalMarks: 0,
         questionWiseJustifications: [],
-        userSubmit: false,
         currentQuestionAnswer: null
     };
     // Get DOM references
@@ -76,8 +75,10 @@
         function makeQuizScreenVisible() {
             const quizScreen = document.getElementById('quiz-screen');
             const startScreen = document.getElementById('start-screen');
+            const resultsScreen = document.getElementById('results-screen');
 
             startScreen.classList.add('hidden');
+            resultsScreen.classList.add('hidden');
             quizScreen.classList.remove('hidden');
             return;
         };
@@ -164,9 +165,12 @@
         function makeResultsScreenVisible() {
             const quizScreen = document.getElementById('quiz-screen');
             const resultsScreen = document.getElementById('results-screen');
+            const startScreen = document.getElementById('start-screen')
 
             quizScreen.classList.add('hidden');
+            startScreen.classList.remove('hidden');
             resultsScreen.classList.remove('hidden');
+            addDataToResultsScreen();
             return;
         }
 
@@ -211,6 +215,37 @@
             totalMarks: 0,
             questionWiseJustifications: []
         };
+    };
+
+    function addDataToResultsScreen() {
+        const correctlyAnswered = state.correctlyAnswered;
+        const totalMarks = state.totalMarks;
+        const questionsArray = state.questionsArray;
+
+        const resultsScreen = document.getElementById('results-screen');
+
+        const scoresDiv = document.createElement('div');
+        const totalMarksHeading = document.createElement('h3');
+        totalMarksHeading.textContent = `Total Marks: ${totalMarks}`;
+        const correctlyAnsweredHeading = document.createElement('h3');
+        correctlyAnsweredHeading.textContent = `Correctly Answered: ${correctlyAnswered}`;
+        scoresDiv.appendChild(totalMarksHeading);
+        scoresDiv.appendChild(correctlyAnsweredHeading);
+
+        
+        const questionJustficationDiv = document.createElement('div');
+        for(let i=0; i<questionsArray.length; ++i) {
+            const questionHeading = document.createElement('h4');
+            const justificationParagraph = document.createElement('p');
+            questionHeading.textContent = `Question: ${questionsArray[i].question}`;
+            justificationParagraph.textContent = `Justification: ${questionsArray[i].justification}`;
+            questionJustficationDiv.appendChild(questionHeading);
+            questionJustficationDiv.appendChild(justificationParagraph);
+        };
+
+        scoresDiv.appendChild(questionJustficationDiv);
+        resultsScreen.appendChild(scoresDiv);
+        return;
     };
     
 }) ();
