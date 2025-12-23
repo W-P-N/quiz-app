@@ -1,4 +1,5 @@
 (function () {
+    // State Management
     const state = {
         counter: 0,
         timeInterval: null,
@@ -7,9 +8,21 @@
         currentQuestionNumber: 0,
         correctlyAnswered: 0,
         totalMarks: 0,
-        questionWiseJustifications: [],
-        currentQuestionAnswer: null
+        questionWiseJustifications: []
     };
+
+    function stateReset() {
+        state.counter = 0;
+        state.timeInterval = null;
+        state.totalQuestions = 0;
+        state.questionsArray = [];
+        state.currentQuestionNumber = 0;
+        state.correctlyAnswered = 0;
+        state.totalMarks = 0;
+        state.questionWiseJustifications = [];
+    };
+
+
     // Get DOM references
     const questionTimeSlider = document.getElementById('question-time');
     const sliderValue = document.getElementById('slider-value');
@@ -202,19 +215,6 @@
                 };
                 return response.json();
             })
-    };
-
-    function stateReset() {
-        state = {
-            counter: 0,
-            timeInterval: null,
-            totalQuestions: 0,
-            questionsArray: [],
-            currentQuestionNumber: 0,
-            correctlyAnswered: 0,
-            totalMarks: 0,
-            questionWiseJustifications: []
-        };
     };
 
     function addDataToResultsScreen() {
