@@ -8,7 +8,8 @@
         currentQuestionNumber: 0,
         correctlyAnswered: 0,
         totalMarks: 0,
-        questionWiseJustifications: []
+        questionWiseJustifications: [],
+        data: []
     };
 
     function stateReset() {
@@ -22,46 +23,120 @@
         state.questionWiseJustifications = [];
     };
 
+    // Data
+    async function fetchData() {
+        fetch('./data.json')
+            .then(response => {
+                if(!response.ok) {
+                    throw new Error('Data not found');
+                };
+                state.data = response.json();
+                return;
+            });
+    };
+    
+    function shuffleData() {
+        const dataLen = state.data.length;
+        for(let i=dataLen - 1; i>1; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [state.data[i], state.data[j]] = [state.data[j], state.data[i]];
+        };
+        return;
+    };
 
-    // Get DOM references
+    // UI
+    function showScreen(screenNumber) {
+        const quizScreen = document.getElementById('quiz-screen');
+        const startScreen = document.getElementById('start-screen');
+        const resultsScreen = document.getElementById('results-screen');
+
+        switch (screenNumber) {
+            case 0:
+                // Show start screen only
+                startScreen.classList.remove('hidden');
+                quizScreen.classList.add('hidden');
+                resultsScreen.classList.add('hidden');
+                break;
+            case 1:
+                // Show quiz screen only
+                startScreen.classList.add('hidden');
+                quizScreen.classList.remove('hidden');
+                resultsScreen.classList.add('hidden');
+                break;
+            case 2:
+                // Show result screen only
+                startScreen.classList.add('hidden');
+                quizScreen.classList.add('hidden');
+                resultsScreen.classList.remove('hidden');
+                break;
+            default:
+                startScreen.classList.remove('hidden');
+                quizScreen.classList.add('hidden');
+                resultsScreen.classList.add('hidden');
+                break;
+        }
+        return;
+    };
+
+    // Quiz Logic
+
+    //// Get DOM references
     const questionTimeSlider = document.getElementById('question-time');
     const sliderValue = document.getElementById('slider-value');
     const startQuizButton = document.getElementById('start-game-button');
     const errorSpanText = document.getElementById('error');
     const submitAnswerButton = document.getElementById('submit-answer-button');
 
-    // Event Listeners
+    //// Event Listeners
     document.addEventListener('DOMContentLoaded', function() {
-        // Slider Value display after the content for the DOM is loaded
+        //// Slider Value display after the content for the DOM is loaded
         sliderValue.textContent = questionTimeSlider.value;
     });
     questionTimeSlider.addEventListener('input', function() {
+        //// Listener that listens to change in slider value
         sliderValue.textContent = this.value;
     });
-    startQuizButton.addEventListener('click', startQuiz);
-
-    async function startQuiz(e) {
-        e.preventDefault();
-        errorSpanText.innerHTML = "";
-        // DOM Element reference
+    //// Button to start quiz
+    startQuizButton.addEventListener('click', function() {
+        try {
+            validateStartQuiz();
+            getRandomQuestions();
+            startQuiz();
+        } catch (error) {
+            errorSpanText.textContent = error;
+        };
+    });
+    //// Event Listener when user submits the answer
+    submitAnswerButton.addEventListener('click', function() {
+        clearInterval(state.timeInterval);
+        onQuestionEnd();
+    });
+    //// Functions
+    function validateStartQuiz() {
+        // Get Input
         const numQuestionsInput = document.getElementById('number-of-questions');
+        // Update state
+        state.totalQuestions = numQuestionsInput.value;
+        // Get min and max values
         const minNumQuestions = numQuestionsInput.min;
         const maxNumQuestions = numQuestionsInput.max;
+        // Check
+        if(!state.totalQuestions || state.totalQuestions < minNumQuestions || state.totalQuestions > maxNumQuestions) {
+            throw new Error(`Please select minimum ${minNumQuestions} and maximum ${maxNumQuestions} as number of questions.`)
+        };
+        // console.log(numberOfQuestions.value, questionTimeSlider.value)  // Debug Log
+        return;
+    };
+    function getRandomQuestions() {
+        const count = parseInt(state.totalQuestions
+    }
+    //// Start quiz function
+    async function startQuiz(e) {
+        e.preventDefault();
+        errorSpanText.textContent = "";
 
-        // Event Listener for answer
-        submitAnswerButton.addEventListener('click', function() {
-            clearInterval(state.timeInterval);
-            onQuestionEnd();
-        });
 
         // Functions
-        function validateNumberOfQuestions(numberOfQuestions, min, max) {
-            if(!numberOfQuestions || numberOfQuestions < 5 || numberOfQuestions > 100) {
-                throw new Error(`Please select minimum ${min} and maximum ${max} as number of questions.`)
-            };
-            console.log(numberOfQuestions.value, questionTimeSlider.value)  // Debug Log
-            return;
-        };
         async function getRandomQuestionsInArray(numQuestionsValue, min, max) {
             const count = parseInt(numQuestionsValue);
             const parsedMin = parseInt(min);
@@ -188,10 +263,16 @@
         }
 
         try {
-            // DOM references:
+            // Get State vaiables:
             state.totalQuestions = parseInt(numQuestionsInput.value);
             state.currentQuestionNumber = 0;
             state.counter = 0;
+
+            // Validation
+
+            // Get Data 
+            // Quiz Display
+
             // Check whether the number of questions are within the range
             validateNumberOfQuestions(state.totalQuestions, minNumQuestions, maxNumQuestions);
             // Get Questions in State array
@@ -201,20 +282,10 @@
             // Show questions
             showNextQuestion();
         } catch (error) {
-            errorSpanText.innerHTML = error;
+            errorSpanText.textContent = error;
             stateReset();
         }
         return;
-    };
-
-    async function fetchData() {
-        return fetch('./data.json')
-            .then(response => {
-                if(!response.ok) {
-                    throw new Error('Data not found');
-                };
-                return response.json();
-            })
     };
 
     function addDataToResultsScreen() {
