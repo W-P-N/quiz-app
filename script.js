@@ -24,6 +24,7 @@
         state.questionWiseJustifications = [];
         state.answersArray = [];
         state.data = [];
+        return;
     };
 
     // Data
@@ -57,6 +58,7 @@
                 break;
             case 2:
                 // Show result screen only
+                // resultsScreen.replaceChildren('');
                 startScreen.classList.add('hidden');
                 quizScreen.classList.add('hidden');
                 resultsScreen.classList.remove('hidden');
@@ -90,14 +92,27 @@
         //// Listener that listens to change in slider value
         sliderValue.textContent = this.value;
     });
+    playAgainButton.addEventListener('click', function() {
+        stateReset();
+        startQuiz();
+    });
+    homeButton.addEventListener('click', function() {
+        stateReset();
+        showScreen(0);
+    })
+
     //// Event Listener when user submits the answer
     submitAnswerButton.addEventListener('click', function() {
         clearInterval(state.timeInterval);
         onQuestionEnd();
     });
     //// Button to start quiz
-    startQuizButton.addEventListener('click', async function(e) {
-        e.preventDefault();
+    startQuizButton.addEventListener('click', startQuiz);
+    //// Functions
+    async function startQuiz(e) {
+        if(e) {
+            e.preventDefault();
+        }
         errorSpanText.textContent = "";
         try {
             // Get Data
@@ -118,8 +133,7 @@
             errorSpanText.textContent = error;
             stateReset();
         };
-    });
-    //// Functions
+    };
     function validateStartQuiz() {
         // Get Input
         const numQuestionsInput = document.getElementById('number-of-questions');
@@ -229,8 +243,8 @@
         const totalMarks = state.totalMarks;
         const questionsArray = state.questionsArray;
 
-        const resultsScreen = document.getElementById('results-screen');
-
+        const resultsSection = document.getElementById('results');
+        resultsSection.replaceChildren('');
         const scoresDiv = document.createElement('div');
         const totalMarksHeading = document.createElement('h3');
         totalMarksHeading.textContent = `Total Marks: ${totalMarks}`;
@@ -251,7 +265,7 @@
         };
 
         scoresDiv.appendChild(questionJustficationDiv);
-        resultsScreen.appendChild(scoresDiv);
+        resultsSection.appendChild(scoresDiv);
         return;
     };
     
