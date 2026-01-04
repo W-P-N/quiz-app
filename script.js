@@ -78,6 +78,8 @@
     const startQuizButton = document.getElementById('start-game-button');
     const errorSpanText = document.getElementById('error');
     const submitAnswerButton = document.getElementById('submit-answer-button');
+    const playAgainButton = document.getElementById('play-again-button');
+    const homeButton = document.getElementById('home-button');
 
     //// Event Listeners
     document.addEventListener('DOMContentLoaded', function() {
