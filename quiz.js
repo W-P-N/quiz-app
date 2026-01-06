@@ -1,5 +1,6 @@
 import * as UI from "./ui.js";
 import * as Data from "./data.js";
+import { SCREENS } from "./screens.js";
 
 // Quiz functions
 function startTimer(state) {
@@ -18,7 +19,7 @@ function showNextQuestion(state) {
     if(state.currentQuestionNumber >= state.totalQuestions) {
         UI.renderResults(state);
         // Show results screen - 2
-        UI.showScreen(2);
+        UI.showScreen(SCREENS.RESULTS);
         return;
     };
     UI.displayQuestion(state);
@@ -28,8 +29,7 @@ function showNextQuestion(state) {
 export function processAnswer(state) {
     clearInterval(state.timeInterval);
 
-    const selectedAnswer = UI.selectedAnswer;
-
+    const selectedAnswer = UI.getSelectedAnswer();
     if(selectedAnswer) {
         if(selectedAnswer.id === state.questionsArray[state.currentQuestionNumber]) {
             state.totalMarks += 2;
@@ -53,14 +53,21 @@ export async function start(state) {
     };
     
     UI.showError("");
+
     if(state.data.length == 0) {
-        state.data = await Data.fetchData();
+        try {
+            state.data = await Data.fetchData();
+        } catch (error) {
+            UI.showError('Unable to fetch questions. Please try again later!');
+            return;
+        }
     };
+
     Data.shuffleData(state.data);
     state.questionsArray = state.data.slice(0, numQuestions);
     state.currentQuestionNumber = 0;
     state.totalQuestions = numQuestions;
-    UI.showScreen(1);
+    UI.showScreen(SCREENS.QUIZ);
     showNextQuestion(state);
 };
 

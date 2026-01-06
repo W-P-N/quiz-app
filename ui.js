@@ -77,7 +77,6 @@ export function displayQuestion(state) {
     // Question Display
     const currentQuestion = state.questionsArray[state.currentQuestionNumber];
     questionBlock.textContent = currentQuestion.question;
-    state.questionWiseJustifications.push(currentQuestion.justification);
 
     optionsBlock.replaceChildren('');
     // Options Display
@@ -107,6 +106,10 @@ export function showError(errorText) {
     errorSpanText.textContent = errorText;
 };
 
+export function getSelectedAnswer() {
+    return document.querySelector('input[name="option"]:checked');
+};
+
 // Exporting General UI references
 export const startQuizButton = document.getElementById('start-game-button');
 export const errorSpanText = document.getElementById('error');
@@ -129,6 +132,3 @@ export const secondsDisplay = document.getElementById('seconds-display');
 
 // Exporting Results references
 export const resultsSection = document.getElementById('results');
-
-// Exporting Query Selectors 
-export const selectedAnswer = document.querySelector('input[name="option"]:checked');
